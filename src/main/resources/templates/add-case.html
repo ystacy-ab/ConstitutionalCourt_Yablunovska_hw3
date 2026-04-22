@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register New Case</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+<h2>Register New Case</h2>
+<form th:action="@{/cases}" th:object="${courtCase}" method="post" class="col-md-6">
+    <div class="mb-3">
+        <label class="form-label">Case Number (ID):</label>
+        <input type="number" th:field="*{caseNumber}" class="form-control" required placeholder="e.g. 201507">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Case Title:</label>
+        <input type="text" th:field="*{caseTitle}" class="form-control" required placeholder="Enter case description">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Filing Date:</label>
+        <input type="date" th:field="*{filingDate}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Status:</label>
+        <select th:field="*{status}" class="form-select">
+            <option value="OPEN">OPEN</option>
+            <option value="PENDING">PENDING</option>
+            <option value="CLOSED">CLOSED</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Petitioner ID:</label>
+        <input type="number" th:field="*{petitionerId}" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Case</button>
+    <a th:href="@{/cases}" class="btn btn-secondary">Cancel</a>
+</form>
+</body>
+</html>
