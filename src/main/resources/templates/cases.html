@@ -6,6 +6,14 @@
 </head>
 <body class="container mt-5">
 <h2>Constitutional Court Cases</h2>
+
+<div class="mb-3">
+    <a th:href="@{/cases/new}" class="btn btn-primary">Register New Case</a>
+    <a th:href="@{/petitioners}" class="btn btn-outline-secondary">Petitioners</a>
+    <a th:href="@{/hearings}" class="btn btn-outline-secondary">Hearing Schedule</a>
+    <a th:href="@{/rulings}" class="btn btn-outline-secondary">Court Rulings</a>
+</div>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -13,6 +21,7 @@
         <th>Title</th>
         <th>Filing Date</th>
         <th>Status</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -21,9 +30,19 @@
         <td th:text="${c.caseTitle}"></td>
         <td th:text="${c.filingDate}"></td>
         <td th:text="${c.status}"></td>
+        <td>
+            <a th:href="@{/cases/edit/{id}(id=${c.caseNumber})}"
+               class="btn btn-sm btn-warning">Edit</a>
+            <form th:action="@{/cases/delete/{id}(id=${c.caseNumber})}"
+                  method="post" style="display:inline">
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Delete case ' + [[${c.caseNumber}]] + '?')">
+                    Delete
+                </button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{/cases/new}" class="btn btn-primary">Register New Case</a>
 </body>
 </html>

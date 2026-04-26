@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schedule New Hearing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+<h2>Schedule New Hearing</h2>
+<form th:action="@{/hearings}" th:object="${hearing}" method="post" class="col-md-6">
+
+    <div class="mb-3">
+        <label class="form-label">Hearing ID:</label>
+        <input type="number" th:field="*{hearingId}" class="form-control"
+               required placeholder="e.g. 10">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Case:</label>
+        <select th:field="*{caseNumber}" class="form-select" required>
+            <option value="">-- Select Case --</option>
+            <option th:each="c : ${cases}"
+                    th:value="${c.caseNumber}"
+                    th:text="${c.caseNumber + ' — ' + c.caseTitle}">
+            </option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Hearing Date:</label>
+        <input type="date" th:field="*{hearingDate}" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Location:</label>
+        <input type="text" th:field="*{location}" class="form-control"
+               required placeholder="e.g. Main Hall, Kyiv">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Judge:</label>
+        <select name="judgeId" class="form-select" required>
+            <option value="">-- Select Judge --</option>
+            <option th:each="j : ${judges}"
+                    th:value="${j.judgeId}"
+                    th:text="${j.firstName + ' ' + j.lastName}">
+            </option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Petitioner:</label>
+        <select name="petitionerId" class="form-select" required>
+            <option value="">-- Select Petitioner --</option>
+            <option th:each="p : ${petitioners}"
+                    th:value="${p.petitionerId}"
+                    th:text="${p.petitionerName}">
+            </option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Hearing</button>
+    <a th:href="@{/hearings}" class="btn btn-secondary">Cancel</a>
+</form>
+</body>
+</html>

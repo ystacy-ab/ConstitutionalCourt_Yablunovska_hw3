@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register New Case</title>
+    <title>Edit Case</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body class="container mt-5">
-<h2>Register New Case</h2>
-<form th:action="@{/cases}" th:object="${courtCase}" method="post" class="col-md-6">
+<h2>Edit Case</h2>
+<form th:action="@{/cases/update}" th:object="${courtCase}" method="post" class="col-md-6">
+    <input type="hidden" th:field="*{caseNumber}"/>
+
     <div class="mb-3">
-        <label class="form-label">Case Number (ID):</label>
-        <input type="number" th:field="*{caseNumber}" class="form-control"
-               required placeholder="e.g. 201507">
+        <label class="form-label">Case Number:</label>
+        <input type="text" th:value="${courtCase.caseNumber}" class="form-control" readonly>
     </div>
     <div class="mb-3">
         <label class="form-label">Case Title:</label>
-        <input type="text" th:field="*{caseTitle}" class="form-control"
-               required placeholder="Enter case description">
+        <input type="text" th:field="*{caseTitle}" class="form-control" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Filing Date:</label>
@@ -32,14 +32,13 @@
     <div class="mb-3">
         <label class="form-label">Petitioner:</label>
         <select th:field="*{petitionerId}" class="form-select" required>
-            <option value="">-- Select Petitioner --</option>
             <option th:each="p : ${petitioners}"
                     th:value="${p.petitionerId}"
                     th:text="${p.petitionerName + ' (' + p.petitionerType + ')'}">
             </option>
         </select>
     </div>
-    <button type="submit" class="btn btn-success">Save Case</button>
+    <button type="submit" class="btn btn-success">Update Case</button>
     <a th:href="@{/cases}" class="btn btn-secondary">Cancel</a>
 </form>
 </body>

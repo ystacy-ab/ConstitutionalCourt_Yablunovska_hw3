@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Court Rulings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+<h2>Court Rulings</h2>
+
+<div class="mb-3">
+    <a th:href="@{/rulings/new}" class="btn btn-primary">Add New Ruling</a>
+    <a th:href="@{/cases}" class="btn btn-outline-secondary">← Cases</a>
+    <a th:href="@{/hearings}" class="btn btn-outline-secondary">Hearing Schedule</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ruling ID</th>
+        <th>Verdict Date</th>
+        <th>Case Title</th>
+        <th>Status</th>
+        <th>Verdict</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${rulings}">
+        <td th:text="${r.rulingId}"></td>
+        <td th:text="${r.verdictDate}"></td>
+        <td th:text="${r.caseTitle}"></td>
+        <td th:text="${r.status}"></td>
+        <td th:text="${r.verdictText}"></td>
+        <td>
+            <a th:href="@{/rulings/edit/{id}(id=${r.rulingId})}"
+               class="btn btn-sm btn-warning">Edit</a>
+            <form th:action="@{/rulings/delete/{id}(id=${r.rulingId})}"
+                  method="post" style="display:inline">
+                <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Delete ruling ' + [[${r.rulingId}]] + '?')">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

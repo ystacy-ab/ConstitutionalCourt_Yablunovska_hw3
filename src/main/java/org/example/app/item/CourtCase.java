@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @Table("CourtCase")
 public class CourtCase implements Persistable<Integer> {
+
     @Id
     @Column("CaseNumber")
     private Integer caseNumber;
@@ -27,14 +28,20 @@ public class CourtCase implements Persistable<Integer> {
     @Column("PetitionerID")
     private Integer petitionerId;
 
+    @Transient
+    private boolean isNewRecord = true;
+
     @Override
     public Integer getId() {
         return caseNumber;
     }
 
     @Override
-    @Transient
     public boolean isNew() {
-        return true;
+        return isNewRecord;
+    }
+
+    public void markAsExisting() {
+        this.isNewRecord = false;
     }
 }
