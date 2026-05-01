@@ -1,9 +1,9 @@
 package org.example.app.item;
 
 public record RulingView(
-        Integer rulingId,
-        String verdictDate,
-        String verdictText,
-        String caseTitle,
+        Integer ruling_id,
+        String verdict_date,
+        String verdict_text,
+        String case_title,
         String status
 ) {}

@@ -26,18 +26,18 @@
     </thead>
     <tbody>
     <tr th:each="r : ${rulings}">
-        <td th:text="${r.rulingId}"></td>
-        <td th:text="${r.verdictDate}"></td>
-        <td th:text="${r.caseTitle}"></td>
+        <td th:text="${r.ruling_id}"></td>
+        <td th:text="${r.verdict_date}"></td>
+        <td th:text="${r.case_title}"></td>
         <td th:text="${r.status}"></td>
-        <td th:text="${r.verdictText}"></td>
+        <td th:text="${r.verdict_text}"></td>
         <td>
-            <a th:href="@{/rulings/edit/{id}(id=${r.rulingId})}"
+            <a th:href="@{/rulings/edit/{id}(id=${r.ruling_id})}"
                class="btn btn-sm btn-warning">Edit</a>
-            <form th:action="@{/rulings/delete/{id}(id=${r.rulingId})}"
+            <form th:action="@{/rulings/delete/{id}(id=${r.ruling_id})}"
                   method="post" style="display:inline">
                 <button type="submit" class="btn btn-sm btn-danger"
-                        onclick="return confirm('Delete ruling ' + [[${r.rulingId}]] + '?')">
+                        onclick="return confirm('Delete ruling ' + [[${r.ruling_id}]] + '?')">
                     Delete
                 </button>
             </form>

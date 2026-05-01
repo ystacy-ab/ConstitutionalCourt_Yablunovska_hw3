@@ -12,11 +12,6 @@
 <form th:action="@{/rulings}" th:object="${ruling}" method="post" class="col-md-6">
 
     <div class="mb-3">
-        <label class="form-label">Ruling ID:</label>
-        <input type="number" th:field="*{rulingId}" class="form-control"
-               required placeholder="e.g. 5">
-    </div>
-    <div class="mb-3">
         <label class="form-label">Case:</label>
         <select th:field="*{caseNumber}" class="form-select" required>
             <option value="">-- Select Case --</option>

@@ -22,37 +22,37 @@ public class PetitionerController {
 
     @GetMapping
     public String listPetitioners(Model model) {
-        model.addAttribute("petitioners", repository.findAll());
+        model.addAttribute("petitioners", repository.findAllWithDetails());
         return "petitioners";
     }
 
     @GetMapping("/new")
-    public String showAddForm(Model model) {
+    public String showAddForm() {
         return "add-petitioner";
     }
 
     @PostMapping
     public String savePetitioner(
-            @RequestParam Integer petitionerId,
             @RequestParam String petitionerName,
             @RequestParam String petitionerType,
             @RequestParam(required = false) String passportId,
             @RequestParam(required = false) String registrationNumber) {
 
         Petitioner petitioner = new Petitioner();
-        petitioner.setPetitionerId(petitionerId);
         petitioner.setPetitionerName(petitionerName);
         petitioner.setPetitionerType(petitionerType);
-        repository.save(petitioner);
+        Petitioner saved = repository.save(petitioner);
 
-        if ("Individual".equals(petitionerType) && passportId != null && !passportId.isBlank()) {
+        if ("Individual".equals(petitionerType)
+                && passportId != null && !passportId.isBlank()) {
             IndividualPetitioner ind = new IndividualPetitioner();
-            ind.setPetitionerId(petitionerId);
+            ind.setPetitionerId(saved.getPetitionerId());
             ind.setPassportId(passportId);
             individualRepo.save(ind);
-        } else if ("Organization".equals(petitionerType) && registrationNumber != null && !registrationNumber.isBlank()) {
+        } else if ("Organization".equals(petitionerType)
+                && registrationNumber != null && !registrationNumber.isBlank()) {
             OrganizationPetitioner org = new OrganizationPetitioner();
-            org.setPetitionerId(petitionerId);
+            org.setPetitionerId(saved.getPetitionerId());
             org.setRegistrationNumber(registrationNumber);
             organizationRepo.save(org);
         }
@@ -62,6 +62,8 @@ public class PetitionerController {
 
     @PostMapping("/delete/{id}")
     public String deletePetitioner(@PathVariable Integer id) {
+        individualRepo.deleteById(id);
+        organizationRepo.deleteById(id);
         repository.deleteById(id);
         return "redirect:/petitioners";
     }

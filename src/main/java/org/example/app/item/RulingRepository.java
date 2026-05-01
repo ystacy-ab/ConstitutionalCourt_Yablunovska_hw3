@@ -9,10 +9,10 @@ import java.util.List;
 public interface RulingRepository extends CrudRepository<Ruling, Integer> {
 
     @Query("""
-        SELECT r.RulingID     AS rulingId,
-               r.VerdictDate  AS verdictDate,
-               r.VerdictText  AS verdictText,
-               c.CaseTitle    AS caseTitle,
+        SELECT r.RulingID     AS ruling_id,
+               r.VerdictDate  AS verdict_date,
+               r.VerdictText  AS verdict_text,
+               c.CaseTitle    AS case_title,
                c.Status       AS status
         FROM Ruling r
         JOIN CourtCase c ON r.CaseNumber = c.CaseNumber

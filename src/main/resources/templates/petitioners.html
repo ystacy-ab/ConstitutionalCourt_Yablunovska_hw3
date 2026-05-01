@@ -18,19 +18,26 @@
         <th>ID</th>
         <th>Name</th>
         <th>Type</th>
+        <th>Passport / Reg. No.</th>
         <th>Actions</th>
     </tr>
     </thead>
+    <!-- У файлі petitioners.html -->
+
     <tbody>
     <tr th:each="p : ${petitioners}">
-        <td th:text="${p.petitionerId}"></td>
-        <td th:text="${p.petitionerName}"></td>
-        <td th:text="${p.petitionerType}"></td>
+        <td th:text="${p.petitioner_id}"></td>
+        <td th:text="${p.petitioner_name}"></td>
+        <td th:text="${p.petitioner_type}"></td>
         <td>
-            <form th:action="@{/petitioners/delete/{id}(id=${p.petitionerId})}"
+            <span th:if="${p.passport_id != null}" th:text="${p.passport_id}"></span>
+            <span th:if="${p.registration_number != null}" th:text="${p.registration_number}"></span>
+        </td>
+        <td>
+            <form th:action="@{/petitioners/delete/{id}(id=${p.petitioner_id})}"
                   method="post" style="display:inline">
                 <button type="submit" class="btn btn-sm btn-danger"
-                        onclick="return confirm('Delete petitioner ' + [[${p.petitionerId}]] + '?')">
+                        onclick="return confirm('Delete petitioner ' + [[${p.petitioner_id}]] + '?')">
                     Delete
                 </button>
             </form>

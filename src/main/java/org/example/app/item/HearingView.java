@@ -1,10 +1,10 @@
 package org.example.app.item;
 
 public record HearingView(
-        Integer hearingId,
-        String hearingDate,
+        Integer hearing_id,
+        String hearing_date,
         String location,
-        String caseTitle,
-        String judgeName,
-        String petitionerName
+        String case_title,
+        String judge_name,
+        String petitioner_name
 ) {}

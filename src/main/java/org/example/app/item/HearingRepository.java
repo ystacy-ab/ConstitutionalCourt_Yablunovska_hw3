@@ -9,12 +9,12 @@ import java.util.List;
 public interface HearingRepository extends CrudRepository<Hearing, Integer> {
 
     @Query("""
-        SELECT h.HearingID        AS hearingId,
-               h.HearingDate      AS hearingDate,
+        SELECT h.HearingID        AS hearing_id,
+               h.HearingDate      AS hearing_date,
                h.Location         AS location,
-               c.CaseTitle        AS caseTitle,
-               CONCAT(j.FirstName, ' ', j.LastName) AS judgeName,
-               p.PetitionerName   AS petitionerName
+               c.CaseTitle        AS case_title,
+               CONCAT(j.FirstName, ' ', j.LastName) AS judge_name,
+               p.PetitionerName   AS petitioner_name
         FROM Hearing h
         JOIN CourtCase c  ON h.CaseNumber         = c.CaseNumber
         JOIN Attends a    ON h.HearingID           = a.Hearing_HearingID

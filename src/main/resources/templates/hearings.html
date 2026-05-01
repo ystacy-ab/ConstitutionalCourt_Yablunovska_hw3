@@ -27,19 +27,19 @@
     </thead>
     <tbody>
     <tr th:each="h : ${hearings}">
-        <td th:text="${h.hearingId}"></td>
-        <td th:text="${h.hearingDate}"></td>
+        <td th:text="${h.hearing_id}"></td>
+        <td th:text="${h.hearing_date}"></td>
         <td th:text="${h.location}"></td>
-        <td th:text="${h.caseTitle}"></td>
-        <td th:text="${h.judgeName}"></td>
-        <td th:text="${h.petitionerName}"></td>
+        <td th:text="${h.case_title}"></td>
+        <td th:text="${h.judge_name}"></td>
+        <td th:text="${h.petitioner_name}"></td>
         <td>
-            <a th:href="@{/hearings/edit/{id}(id=${h.hearingId})}"
+            <a th:href="@{/hearings/edit/{id}(id=${h.hearing_id})}"
                class="btn btn-sm btn-warning">Edit</a>
-            <form th:action="@{/hearings/delete/{id}(id=${h.hearingId})}"
+            <form th:action="@{/hearings/delete/{id}(id=${h.hearing_id})}"
                   method="post" style="display:inline">
                 <button type="submit" class="btn btn-sm btn-danger"
-                        onclick="return confirm('Delete hearing ' + [[${h.hearingId}]] + '?')">
+                        onclick="return confirm('Delete hearing ' + [[${h.hearing_id}]] + '?')">
                     Delete
                 </button>
             </form>
