@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Court Ruling Report</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+<h2 class="mb-4">Final Court Rulings Report</h2>
+<div class="mb-3">
+    <a th:href="@{/rulings}" class="btn btn-outline-secondary">← Back</a>
+    <button onclick="window.print()" class="btn btn-primary">Print Report</button>
+</div>
+<table class="table table-bordered table-striped shadow-sm">
+    <thead class="table-info">
+    <tr>
+        <th>ID</th><th>Verdict Date</th><th>Case Title</th><th>Status</th><th>Verdict Text</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${rulings}">
+        <td th:text="${r.rulingId}"></td>
+        <td th:text="${r.verdictDate}"></td>
+        <td th:text="${r.caseTitle}"></td>
+        <td><span class="badge bg-secondary" th:text="${r.status}"></span></td>
+        <td th:text="${r.verdictText}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

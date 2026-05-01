@@ -23,6 +23,18 @@ public interface HearingRepository extends CrudRepository<Hearing, Integer> {
         """)
     List<HearingView> findAllWithDetails();
 
+    @Query("SELECT h.HearingID AS hearing_id, " +
+            "h.HearingDate AS hearing_date, " +
+            "h.Location AS location, c.CaseTitle AS case_title, " +
+            "CONCAT(j.FirstName, ' ', j.LastName) AS judge_name, " +
+            "p.PetitionerName AS petitioner_name " +
+            "FROM Hearing h " +
+            "JOIN CourtCase c ON h.CaseNumber = c.CaseNumber " +
+            "LEFT JOIN Attends a ON h.HearingID = a.Hearing_HearingID " +
+            "LEFT JOIN Judge j ON a.Judge_JudgeID = j.JudgeID " +
+            "LEFT JOIN Petitioner p ON a.PetitionerID = p.PetitionerID")
+    List<HearingReportDTO> getHearingNoticeReport();
+
     @Modifying
     @Query("""
         INSERT INTO Attends (Judge_JudgeID, Hearing_HearingID, PetitionerID)

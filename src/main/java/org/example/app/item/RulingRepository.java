@@ -19,6 +19,16 @@ public interface RulingRepository extends CrudRepository<Ruling, Integer> {
         """)
     List<RulingView> findAllWithDetails();
 
+    @Query("""
+    SELECT r.RulingID AS ruling_id,
+           r.VerdictDate AS verdict_date,
+           c.CaseTitle AS case_title,
+           c.Status AS status,
+           r.VerdictText AS verdict_text
+    FROM Ruling r JOIN CourtCase c ON r.CaseNumber = c.CaseNumber
+    """)
+    List<RulingReportDTO> getCourtRulingReport();
+
     @Modifying
     @Query("UPDATE CourtCase SET Status = 'CLOSED' WHERE CaseNumber = :caseNumber")
     void closeCaseByCaseNumber(@Param("caseNumber") Integer caseNumber);
