@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `dbhw3`.`Ruling` (
   CONSTRAINT `fk_Ruling_CourtCase1`
     FOREIGN KEY (`CaseNumber`)
     REFERENCES `dbhw3`.`CourtCase` (`CaseNumber`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `dbhw3`.`Hearing` (
   CONSTRAINT `fk_Hearing_CourtCase1`
     FOREIGN KEY (`CaseNumber`)
     REFERENCES `dbhw3`.`CourtCase` (`CaseNumber`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `dbhw3`.`reviews` (
   CONSTRAINT `fk_CourtCase_has_Law_CourtCase1`
     FOREIGN KEY (`CourtCase_CaseNumber`)
     REFERENCES `dbhw3`.`CourtCase` (`CaseNumber`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CourtCase_has_Law_Law1`
     FOREIGN KEY (`Law_LawID`)
